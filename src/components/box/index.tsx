@@ -1,9 +1,6 @@
 import React from "react";
-import { getFromLocalStorage, saveToLocalStorage } from "../../utils";
-
 interface IProps {
   color: string;
-  index: number;
   onDelete: (color: String) => void;
 }
 

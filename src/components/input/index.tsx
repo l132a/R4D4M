@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Input = (props: any) => {
-  const onsubmit = (e: React.FormEvent) => {
+interface IProps {
+  onSubmit: (color: string) => void;
+}
+
+const Input: React.FunctionComponent<IProps> = (props) => {
+  const [value, setValue] = useState("");
+
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(e);
   };
+
   return (
-    <form onSubmit={props.onSubmit}>
+    <form onSubmit={(e) => onSubmit(e)}>
       <div className="inputBox">
         <label>Add new color:</label>
-        <input type="text" name="color" placeholder="Example #333333"></input>
+        <input
+          type="text"
+          name="color"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Example #333333"
+          required
+        ></input>
         <button type="submit">Add</button>
       </div>
     </form>
