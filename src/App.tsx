@@ -14,10 +14,11 @@ const App = () => {
     const newColors = [...colors, value.toUpperCase()];
     saveToLocalStorage("data", newColors);
     setcolors(newColors);
+    setValue("");
   };
 
-  const onDelete = (item: any) => {
-    const newColors = colors.filter((color: string) => color !== item);
+  const onDelete = (item: String) => {
+    const newColors = colors.filter((color: String) => color !== item);
     saveToLocalStorage("data", newColors);
     setcolors(newColors);
   };
