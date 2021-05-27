@@ -1,20 +1,50 @@
 import React, { useState } from "react";
 import "./styles/global.scss";
 import { Box, Input } from "./components";
-import { getFromLocalStorage, hexToRgb, saveToLocalStorage } from "./utils";
+import {
+  getFromLocalStorage,
+  hexToRgb,
+  rgbToHsl,
+  saveToLocalStorage,
+} from "./utils";
 
 const App = () => {
-  const [colors, setColors] = useState(getFromLocalStorage("data"));
+  const [colors, setColors] = useState(getFromLocalStorage("data", 1));
   const [value, setValue] = useState("");
-  const [filter, setFilter] = useState({
-    r: false,
-    g: false,
-    b: false,
-    s: false,
-  });
+  const [filter, setFilter] = useState(getFromLocalStorage("filter", 2));
+
+  // const tmp = () => {};
 
   const onRed = (e: React.FormEvent<HTMLElement>) => {
-    console.log(e.target);
+    const data = { ...filter, r: !filter.r };
+    setFilter(data);
+    saveToLocalStorage("filter", data);
+
+    colors.map((color: string, index: number) => {
+      const hex = hexToRgb(color);
+      
+      const hsl = rgbToHsl(hex?.r || 0, hex?.g || 0, hex?.b || 0);
+
+      console.log(hsl);
+    });
+  };
+
+  const onGreen = (e: React.FormEvent<HTMLElement>) => {
+    const data = { ...filter, g: !filter.g };
+    setFilter(data);
+    saveToLocalStorage("filter", data);
+  };
+
+  const onBlue = (e: React.FormEvent<HTMLElement>) => {
+    const data = { ...filter, b: !filter.b };
+    setFilter(data);
+    saveToLocalStorage("filter", data);
+  };
+
+  const onSaturation = (e: React.FormEvent<HTMLElement>) => {
+    const data = { ...filter, s: !filter.s };
+    setFilter(data);
+    saveToLocalStorage("filter", data);
   };
 
   const onSubmit = (e: React.FormEvent) => {
@@ -24,15 +54,17 @@ const App = () => {
     const check = colors.filter(
       (color: string) => color === value.toUpperCase()
     );
-    if(check.length > 0) return alert("Color already exist")
+    if (check.length > 0) return alert("Color already exist");
     const newColors = [...colors, value.toUpperCase()];
     saveToLocalStorage("data", newColors);
     setColors(newColors);
     setValue("");
   };
 
-  const onDelete = (item: string) => {
-    const newColors = colors.filter((color: String) => color !== item);
+  const onDelete = (item: number) => {
+    const newColors = colors.filter(
+      (color: String, index: number) => index !== item
+    );
     saveToLocalStorage("data", newColors);
     setColors(newColors);
   };
@@ -61,11 +93,23 @@ const App = () => {
           onChange={(e) => onRed(e)}
         ></input>
         <label>{"Red >50%"}</label>
-        <input type="checkbox"></input>
+        <input
+          type="checkbox"
+          checked={filter.g}
+          onChange={(e) => onGreen(e)}
+        ></input>
         <label>{"Green >50%"}</label>
-        <input type="checkbox"></input>
+        <input
+          type="checkbox"
+          checked={filter.b}
+          onChange={(e) => onBlue(e)}
+        ></input>
         <label>{"Blue >50%"}</label>
-        <input type="checkbox"></input>
+        <input
+          type="checkbox"
+          checked={filter.s}
+          onChange={(e) => onSaturation(e)}
+        ></input>
         <label>{"Saturation >50%"}</label>
       </div>
       <hr className="solid"></hr>

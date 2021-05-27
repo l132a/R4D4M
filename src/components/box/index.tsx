@@ -2,7 +2,7 @@ import React from "react";
 interface IProps {
   color: string;
   index: number;
-  onDelete: (color: string) => void;
+  onDelete: (index: number) => void;
 }
 
 const Box: React.FunctionComponent<IProps> = (props) => {
@@ -15,7 +15,7 @@ const Box: React.FunctionComponent<IProps> = (props) => {
           type="button"
           className="btnDelete"
           name="btn_delete"
-          onClick={() => props.onDelete(props.color)}
+          onClick={() => props.onDelete(props.index)}
         >
           x
         </button>
