@@ -39,3 +39,18 @@ export const getFromLocalStorage = (key: string) => {
 export const saveToLocalStorage = (key: string, data: string[]) => {
   localStorage.setItem(key, JSON.stringify(data));
 };
+
+export const hexToRgb = (color: string) => {
+  const hex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
+  return hex
+    ? {
+        r: parseInt(hex[1], 16),
+        g: parseInt(hex[2], 16),
+        b: parseInt(hex[3], 16),
+      }
+    : null;
+};
+
+export const rgbToHex = (r: number, g: number, b: number) => {
+  return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+};
