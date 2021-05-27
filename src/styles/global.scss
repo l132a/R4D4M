@@ -1,0 +1,56 @@
+body {
+    margin: 0;
+}
+
+.app {
+    text-align: center;
+    padding: 10px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: flex-start;
+}
+
+h1 {
+    font-size: large;
+    font-style: italic;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+    border: 1px solid #999;
+}
+
+.inputBox {
+    display: flex;
+    justify-items: flex-start;
+}
+
+.boxAction {
+    display: flex;
+    margin: 0 10px;
+    font-size: 12px;
+    justify-content: space-between;
+}
+
+.btnDelete {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: transparent
+}
+
+button,
+input {
+    margin-left: 5px;
+}
+
+input {
+    width: 200px;
+}
