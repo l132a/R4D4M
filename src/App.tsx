@@ -9,8 +9,7 @@ const App = () => {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    const newColors = [...colors, value];
+    const newColors = [...colors, value.toUpperCase];
     saveToLocalStorage("data", newColors);
     setcolors(newColors);
   };
