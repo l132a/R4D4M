@@ -1,12 +1,13 @@
 import React from "react";
 interface IProps {
   color: string;
-  onDelete: (color: String) => void;
+  index: number;
+  onDelete: (color: string) => void;
 }
 
 const Box: React.FunctionComponent<IProps> = (props) => {
   return (
-    <form>
+    <div>
       <div className="box" style={{ backgroundColor: props.color }} />
       <div className="boxAction">
         <label>{props.color}</label>
@@ -19,7 +20,7 @@ const Box: React.FunctionComponent<IProps> = (props) => {
           x
         </button>
       </div>
-    </form>
+    </div>
   );
 };
 
