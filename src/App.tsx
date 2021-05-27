@@ -9,6 +9,8 @@ const App = () => {
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (value.length !== 7) return alert("Length must 7");
+    if (value.substring(0, 1) !== "#") return alert("First character must #");
     const newColors = [...colors, value.toUpperCase()];
     saveToLocalStorage("data", newColors);
     setcolors(newColors);
