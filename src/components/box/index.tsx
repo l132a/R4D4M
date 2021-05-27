@@ -1,16 +1,13 @@
 import React from "react";
 import { getFromLocalStorage, saveToLocalStorage } from "../../utils";
 
-const Box = (props: any) => {
-  const deleteColor = () => {
-    let colors = getFromLocalStorage("data");
+interface IProps {
+  color: string;
+  index: number;
+  onDelete: (color: String) => void;
+}
 
-    const newColors = colors.filter((color: any) => color !== props.color);
-
-    saveToLocalStorage("data", newColors);
-
-  };
-
+const Box: React.FunctionComponent<IProps> = (props) => {
   return (
     <form>
       <div className="box" style={{ backgroundColor: props.color }} />
@@ -20,7 +17,7 @@ const Box = (props: any) => {
           type="button"
           className="btnDelete"
           name="btn_delete"
-          onClick={deleteColor}
+          onClick={() => props.onDelete(props.color)}
         >
           x
         </button>

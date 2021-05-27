@@ -10,15 +10,11 @@ const App = () => {
     console.log(new FormData());
   };
 
-  // const onDelete = useCallback(
-  //   (item) => {
-  //     const newColors = colors.filter((color: any) => color !== item.color);
-  //     saveToLocalStorage("data", newColors);
-  //     setcolors(newColors);
-  //     console.log(item);
-  //   },
-  //   [colors]
-  // );
+  const onDelete = (item: any) => {
+    const newColors = colors.filter((color: any) => color !== item);
+    saveToLocalStorage("data", newColors);
+    setcolors(newColors);
+  };
 
   return (
     <div className="app">
@@ -34,7 +30,7 @@ const App = () => {
       <hr className="solid"></hr>
       <div className="container">
         {colors.map((color: string, index: number) => (
-          <Box color={color} index={index} />
+          <Box color={color} index={index} onDelete={onDelete} />
         ))}
       </div>
     </div>

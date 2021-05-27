@@ -1,16 +1,12 @@
 import React from "react";
 
-interface IProps {
-  onAddColor: (color: string) => void;
-}
-
-const Input = () => {
+const Input = (props: any) => {
   const onsubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(e);
   };
   return (
-    <form onSubmit={(e) => onsubmit(e)}>
+    <form onSubmit={props.onSubmit}>
       <div className="inputBox">
         <label>Add new color:</label>
         <input type="text" name="color" placeholder="Example #333333"></input>
